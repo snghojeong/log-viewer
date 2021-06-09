@@ -171,24 +171,18 @@ class MainWidget(QWidget):
     def find_next(self):
         text = self.tb.toPlainText()
         query = self.find_le.text()
-        print(text)
-        print(query)
         pattern = re.compile(query,0)
 
         start = self.last_match.start() + 1 if self.last_match else 0
-        print(start)
 
         self.last_match = pattern.search(text,start)
 
         if self.last_match:
             start = self.last_match.start()
             end = self.last_match.end()
-            print(start)
-            print(end)
 
             self.tb.moveCursor(start,end)
         else:
-            print("not found")
             self.tb.moveCursor(QtGui.QTextCursor.End)
 
     def find_prev(self):
