@@ -182,8 +182,13 @@ class MainWidget(QWidget):
             end = self.last_match.end()
 
             self.tb.moveCursor(start,end)
+
+            c = self.tb.textCursor()
+            c.setPosition(start)
+            c.setPosition(end, QTextCursor.KeepAnchor)
+            self.tb.setTextCursor(c)
         else:
-            self.tb.moveCursor(QtGui.QTextCursor.End)
+            self.tb.moveCursor(QTextCursor.End)
 
     def find_prev(self):
         palette = self.tb.palette()
