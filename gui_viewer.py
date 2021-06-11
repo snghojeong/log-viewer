@@ -181,8 +181,6 @@ class MainWidget(QWidget):
             start = self.last_match.start()
             end = self.last_match.end()
 
-            self.tb.moveCursor(start,end)
-
             c = self.tb.textCursor()
             c.setPosition(start)
             c.setPosition(end, QTextCursor.KeepAnchor)
