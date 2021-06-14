@@ -31,7 +31,7 @@ class MainWidget(QWidget):
         self.pos_list = list()
         self.pos_list.append(0)
 
-        self.last_match = None
+        self.find_pos_list = list()
 
         self.fname = fname
         if self.fname != "":
@@ -173,13 +173,35 @@ class MainWidget(QWidget):
         query = self.find_le.text()
         pattern = re.compile(query,0)
 
-        start = self.last_match.start() + 1 if self.last_match else 0
+        start = (self.find_pos_list[-1] + 1) if len(self.find_pos_list) != 0 else 0
 
-        self.last_match = pattern.search(text,start)
+        match = pattern.search(text,start)
 
-        if self.last_match:
-            start = self.last_match.start()
-            end = self.last_match.end()
+        if match:
+            start = match.start()
+            end = match.end()
+
+            c = self.tb.textCursor()
+            c.setPosition(start)
+            c.setPosition(end, QTextCursor.KeepAnchor)
+            self.tb.setTextCursor(c)
+            self.find_pos_list.append(start)
+        else:
+            self.tb.moveCursor(QTextCursor.End)
+
+    def find_prev(self):
+        text = self.tb.toPlainText()
+        query = self.find_le.text()
+        pattern = re.compile(query,0)
+
+        self.find_pos_list.pop()
+        start = (self.find_pos_list[-1] + 1) if len(self.find_pos_list) != 0 else 0
+
+        match = pattern.search(text,start)
+
+        if match:
+            start = match.start()
+            end = match.end()
 
             c = self.tb.textCursor()
             c.setPosition(start)
@@ -187,25 +209,6 @@ class MainWidget(QWidget):
             self.tb.setTextCursor(c)
         else:
             self.tb.moveCursor(QTextCursor.End)
-
-    def find_prev(self):
-        palette = self.tb.palette()
-        text_format = QTextCharFormat()
-        text_format.setBackground(palette.brush(QPalette.Normal, QPalette.Highlight))
-        text_format.setForeground(palette.brush(QPalette.Normal, QPalette.HighlightedText))
-        doc = self.tb.document()
-        cur = QTextCursor()
-        selections = []
-        while 1:
-            cur = doc.find('EVS', cur)
-            if cur.isNull():
-                break
-            sel = QTextEdit.ExtraSelection()
-            sel.cusor = cur
-            sel.format = text_format
-            selections.append(sel)
-        self.tb.setExtraSelections(selections)
-        self.tb.show()
 
 class MyApp(QMainWindow):
     def __init__(self):
