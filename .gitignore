@@ -3,3 +3,4 @@
 *.swp
 *.dylib
 *.lib
+cscope.out
