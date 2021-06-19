@@ -195,7 +195,7 @@ class MainWidget(QWidget):
         pattern = re.compile(query,0)
 
         self.find_pos_list.pop()
-        start = (self.find_pos_list[-1] + 1) if len(self.find_pos_list) != 0 else 0
+        start = (self.find_pos_list[-1]) if len(self.find_pos_list) != 0 else 0
 
         match = pattern.search(text,start)
 
