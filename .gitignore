@@ -4,3 +4,4 @@
 *.dylib
 *.lib
 cscope.out
+tags
