@@ -51,7 +51,6 @@ class MainWidget(QWidget):
         self.date_le.setText('DATE')
         self.date_le.returnPressed.connect(self.apply_filter)
         self.date_le.textChanged.connect(self.filter_date.setText)
-        #self.combo_box.addItems(["a", "b"])
 
         self.lvle = QLineEdit()
         self.lv_cbox = QComboBox()
