@@ -116,6 +116,9 @@ class MainWidget(QWidget):
         self.prev_btn.pressed.connect(self.prev_logs)
         self.prev_btn.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
+        self.log_cnt_le = QLineEdit()
+        self.log_cnt_le.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+
         self.next_btn = QPushButton('Next')
         self.next_btn.pressed.connect(self.next_logs)
         self.next_btn.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
@@ -125,7 +128,8 @@ class MainWidget(QWidget):
         btnbox.addWidget(self.prev_find_btn, 1)
         btnbox.addWidget(self.next_find_btn, 2)
         btnbox.addWidget(self.prev_btn, 3)
-        btnbox.addWidget(self.next_btn, 4)
+        btnbox.addWidget(self.log_cnt_le, 4)
+        btnbox.addWidget(self.next_btn, 5)
 
         vbox.addLayout(btnbox, 2)
 
