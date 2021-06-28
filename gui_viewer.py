@@ -15,6 +15,8 @@ class MainWidget(QWidget):
     def __init__(self, fname = ""):
         super().__init__()
 
+        self.log_cnt = 100
+
         self.filter_date = QLabel()
         self.filter_date.setText('')
         self.filter_lv = QLabel()
@@ -118,6 +120,7 @@ class MainWidget(QWidget):
 
         self.log_cnt_le = QLineEdit()
         self.log_cnt_le.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        self.log_cnt_le.setText(str(self.log_cnt))
 
         self.next_btn = QPushButton('Next')
         self.next_btn.pressed.connect(self.next_logs)
@@ -139,7 +142,7 @@ class MainWidget(QWidget):
 
     def load_file(self, fname, pos):
         self.tb.clear()
-        ret = geolo_view.read_log(fname, pos, 100, 
+        ret = geolo_view.read_log(fname, pos, self.log_cnt, 
                 date=self.filter_date.text(),
                 lv=self.filter_lv.text(),
                 qlabel=self.filter_qlabel.text(),
