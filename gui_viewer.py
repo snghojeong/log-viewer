@@ -15,7 +15,7 @@ class MainWidget(QWidget):
     def __init__(self, fname = ""):
         super().__init__()
 
-        self.log_cnt = 1000
+        self.log_cnt = 500
 
         self.filter_date = QLabel()
         self.filter_date.setText('')
