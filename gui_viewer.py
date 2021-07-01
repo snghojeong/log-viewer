@@ -142,6 +142,12 @@ class MainWidget(QWidget):
 
     def load_file(self, fname, pos):
         self.tb.clear()
+        log_cnt_txt = self.log_cnt_le.text()
+        try:
+            self.log_cnt = int(log_cnt_txt)
+        except ValueError:
+            self.log_cnt_le.setText(str(self.log_cnt))
+
         ret = geolo_view.read_log(fname, pos, self.log_cnt, 
                 date=self.filter_date.text(),
                 lv=self.filter_lv.text(),
