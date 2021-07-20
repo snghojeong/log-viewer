@@ -228,7 +228,7 @@ class MyApp(QMainWindow):
         self.initUI()
 
     def initUI(self):
-        main_wg = MainWidget(self.showFileDlg())
+        main_wg = MainWidget("")
         self.setCentralWidget(main_wg)
 
         # File chooser
