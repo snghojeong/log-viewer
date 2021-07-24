@@ -228,8 +228,8 @@ class MyApp(QMainWindow):
         self.initUI()
 
     def initUI(self):
-        main_wg = MainWidget("")
-        self.setCentralWidget(main_wg)
+        self.main_wg = MainWidget("")
+        self.setCentralWidget(self.main_wg)
 
         # File chooser
         openFile = QAction(QIcon('open.png'), 'Open', self)
@@ -247,7 +247,7 @@ class MyApp(QMainWindow):
 
     def showFileDlg(self):
         fnames = QFileDialog.getOpenFileName(self, 'Open file', './')
-        return fnames[0]
+        self.main_wg.load_file(fnames[0], 0)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
