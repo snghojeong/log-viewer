@@ -248,6 +248,7 @@ class MyApp(QMainWindow):
     def showFileDlg(self):
         fnames = QFileDialog.getOpenFileName(self, 'Open file', './')
         self.main_wg.load_file(fnames[0], 0)
+        self.main_wg.fname = fnames[0]
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
