@@ -236,10 +236,16 @@ class MyApp(QMainWindow):
         openFile.setShortcut('Ctrl+O')
         openFile.triggered.connect(self.showFileDlg)
 
+        # Edit filter
+        openEdit = QAction(QIcon('edit.png'), 'Edit filter', self)
+        openEdit.setShortcut('Ctrl+E')
+        openEdit.triggered.connect(self.showFileDlg)
+
         menubar = self.menuBar()
         menubar.setNativeMenuBar(False)
         fileMenu = menubar.addMenu('&File')
         fileMenu.addAction(openFile)
+        fileMenu.addAction(openEdit)
 
         self.setWindowTitle('earth log viewer')
         self.setGeometry(100, 300, 1200, 1000)
