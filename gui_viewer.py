@@ -10,6 +10,23 @@ from PyQt5.QtGui import QPalette
 from PyQt5.QtGui import QTextCursor
 
 
+class EditDialog(QDialog):
+
+    def __init__(self, parent = None):
+        super(EditDialog, self).__init__(parent)
+        vbox = QVBoxLayout(self)
+        self.te = QTextEdit()
+        self.te.setAcceptRichText(False)
+        vbox.addWidget(self.te)
+        vbox.addStretch()
+
+    @staticmethod
+    def getFilter(parent = None):
+        dialog = EditDialog(parent)
+        dialog.exec_()
+        return "Shit"
+
+
 class MainWidget(QWidget):
 
     def __init__(self, fname = ""):
@@ -239,7 +256,7 @@ class MyApp(QMainWindow):
         # Edit filter
         openEdit = QAction(QIcon('edit.png'), 'Edit filter', self)
         openEdit.setShortcut('Ctrl+E')
-        openEdit.triggered.connect(self.showFileDlg)
+        openEdit.triggered.connect(self.showEditDlg)
 
         menubar = self.menuBar()
         menubar.setNativeMenuBar(False)
@@ -255,6 +272,10 @@ class MyApp(QMainWindow):
         fnames = QFileDialog.getOpenFileName(self, 'Open file', './')
         self.main_wg.load_file(fnames[0], 0)
         self.main_wg.fname = fnames[0]
+
+    def showEditDlg(self):
+        filter_str = EditDialog.getFilter(self);
+        self.main_wg.tb.append()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
