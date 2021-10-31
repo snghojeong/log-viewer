@@ -14,9 +14,16 @@ class EditDialog(QDialog):
 
     def __init__(self, parent = None):
         super(EditDialog, self).__init__(parent)
+
+        self.txt = ''
+        f = open('log_fltr.cfg','r')
+        with f:
+            self.txt = f.read()
+
         vbox = QVBoxLayout(self)
         self.te = QTextEdit()
         self.te.setAcceptRichText(False)
+        self.te.setText(self.txt)
         vbox.addWidget(self.te)
         vbox.addStretch()
 
