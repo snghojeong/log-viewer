@@ -1,6 +1,7 @@
 import geolo_view
 import sys
 import re
+import os.path
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont
 from PyQt5.QtGui import QFontDatabase
@@ -16,9 +17,10 @@ class EditDialog(QDialog):
         super(EditDialog, self).__init__(parent)
 
         self.txt = ''
-        f = open('log_fltr.cfg','r')
-        with f:
-            self.txt = f.read()
+        if os.path.isfile('logviewer.cfg'):
+            f = open('logviewer.cfg','r')
+            with f:
+                self.txt = f.read()
 
         vbox = QVBoxLayout(self)
         self.te = QTextEdit()
@@ -31,7 +33,7 @@ class EditDialog(QDialog):
     def getFilter(parent = None):
         dialog = EditDialog(parent)
         dialog.exec_()
-        return "Shit"
+        return dialog.txt
 
 
 class MainWidget(QWidget):
@@ -282,7 +284,7 @@ class MyApp(QMainWindow):
 
     def showEditDlg(self):
         filter_str = EditDialog.getFilter(self);
-        self.main_wg.tb.append()
+        self.main_wg.tb.append(filter_str)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
