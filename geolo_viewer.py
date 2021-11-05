@@ -14,26 +14,12 @@ parser.add_argument('--msg', required=False, help='message string to filter')
 args = parser.parse_args()
 
 prog_exit = 0
-pos = 0
-pos_list = list()
-while prog_exit == 0:
-    read_pos = pos
-    if args.md and args.lv:
-        ret = geolo_view.read_log(args.file, read_pos, int(args.cnt), lv=args.lv, md=args.md)
-    elif args.md:
-        ret = geolo_view.read_log(args.file, read_pos, int(args.cnt), md=args.md)
-    elif args.lv:
-        ret = geolo_view.read_log(args.file, read_pos, int(args.cnt), lv=args.lv)
-    else:
-        ret = geolo_view.read_log(args.file, read_pos, int(args.cnt))
-    print(ret["log"])
-    keyin = input('Exit(q), Forward(f), Backward(b):')
-    if keyin == 'q':
-        prog_exit = 1
-    elif keyin == 'b':
-        pos = pos_list.pop()
-    elif keyin == 'f':
-        pos_list.append(pos)
-        pos = ret["pos"]
-    elif ret["log"] == "":
-        prog_exit = 1
+if args.md and args.lv:
+    ret = geolo_view.read_log(args.file, 0, int(args.cnt), lv=args.lv, md=args.md)
+elif args.md:
+    ret = geolo_view.read_log(args.file, 0, int(args.cnt), md=args.md)
+elif args.lv:
+    ret = geolo_view.read_log(args.file, 0, int(args.cnt), lv=args.lv)
+else:
+    ret = geolo_view.read_log(args.file, 0, int(args.cnt))
+print(ret["log"])
