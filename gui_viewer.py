@@ -3,12 +3,7 @@ import sys
 import re
 import os.path
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QFont
-from PyQt5.QtGui import QFontDatabase
-from PyQt5.QtGui import QIcon
-from PyQt5.QtGui import QTextCharFormat
-from PyQt5.QtGui import QPalette
-from PyQt5.QtGui import QTextCursor
+from PyQt5.QtGui import *
 
 
 class EditDialog(QDialog):
